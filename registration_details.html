@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f9ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .details-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .details-container h2 {
+            text-align: center;
+            color: #2575fc;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .details p {
+            margin: 10px 0;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #1a56d9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="details-container">
+        <h2>Registration Details</h2>
+        <div class="details" id="details"></div>
+        <p class="no-data" id="noDataMessage" style="display: none;">No registration data found.</p>
+        <button onclick="clearData()">Clear Data</button>
+    </div>
+
+    <script>
+        // Retrieve data from localStorage
+        const registrationData = JSON.parse(localStorage.getItem("registrationData"));
+        const detailsContainer = document.getElementById("details");
+        const noDataMessage = document.getElementById("noDataMessage");
+
+        if (registrationData) {
+            // Display data
+            detailsContainer.innerHTML = `
+                <p><strong>First Name:</strong> ${registrationData.firstName}</p>
+                <p><strong>Last Name:</strong> ${registrationData.lastName}</p>
+                <p><strong>Mobile Number:</strong> ${registrationData.mobile}</p>
+                <p><strong>Email:</strong> ${registrationData.email}</p>
+                <p><strong>Course Name:</strong> ${registrationData.courseName}</p>
+            `;
+        } else {
+            // Show no data message
+            noDataMessage.style.display = "block";
+        }
+
+        // Function to clear data
+        function clearData() {
+            localStorage.removeItem("registrationData");
+            location.reload(); // Reload the page to reflect changes
+        }
+    </script>
+
+</body>
+</html>

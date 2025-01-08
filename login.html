@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Learn From Jawad</title>
+    <style>
+        /* Import Google Font for a modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Main Container Styling */
+        .login-container {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo Styling */
+        .login-container img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Input Fields Styling */
+        .input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f8f8f8;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border: 2px solid #6a82fb;
+            background-color: #fff;
+        }
+
+        label {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            color: #888;
+            font-size: 14px;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 20px;
+            font-size: 12px;
+            color: #6a82fb;
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6a82fb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px; /* Space above the button */
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #fc5c7d;
+        }
+
+        /* Links Styling */
+        .links {
+            margin-top: 15px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #6a82fb;
+            font-size: 14px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Notification Modal */
+        .notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            animation: fadeInOut 4s forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 30px 20px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            input, button {
+                padding: 12px 18px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+
+            .links a {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Main Login Form -->
+    <div class="login-container">
+        <img src="nn.jpg" alt="Logo">
+        <h1>Login to Your Account</h1>
+        <form id="loginForm" onsubmit="return login()">
+            <div class="input-container">
+                <input type="email" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="links">
+            <a href="#" onclick="showCreateAccountForm()">Create an Account</a>
+        </div>
+    </div>
+
+    <!-- Create Account Form (Hidden by default) -->
+    <div id="createAccountContainer" class="login-container" style="display: none;">
+        <img src="nn.jpg" alt="Logo">
+        <h1>Create Account</h1>
+        <form id="createAccountForm" onsubmit="return createAccount()">
+            <div class="input-container">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+                <label for="fullName">Full Name</label>
+            </div>
+            <div class="input-container">
+                <input type="tel" id="mobileNumber" placeholder="Mobile Number" required>
+                <label for="mobileNumber">Mobile Number</label>
+            </div>
+            <div class="input-container">
+                <input type="email" id="newEmail" placeholder="Email" required>
+                <label for="newEmail">Email</label>
+            </div>
+            <div class="input-container">
+                <input type="password" id="newPassword" placeholder="Password" required>
+                <label for="newPassword">Password</label>
+            </div>
+            <div class="input-container">
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <label for="confirmPassword">Confirm Password</label>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <div class="links">
+            <a href="#" onclick="showLoginForm()">Back to Login</a>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <p id="notificationText"></p>
+    </div>
+
+    <script>
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            notificationText.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 4000);
+        }
+
+        function showCreateAccountForm() {
+            document.querySelector('.login-container').style.display = 'none';
+            document.getElementById('createAccountContainer').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('createAccountContainer').style.display = 'none';
+            document.querySelector('.login-container').style.display = 'block';
+        }
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                showNotification("Login successful! Redirecting to home page...");
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 2000);
+            } else {
+                showNotification("Invalid email or password. Please try again.");
+            }
+
+            return false;
+        }
+
+        function createAccount() {
+            const fullName = document.getElementById('fullName').value;
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const email = document.getElementById('newEmail').value;
+            const password = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showNotification("Passwords do not match. Please try again.");
+                return false;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            if (users.some(u => u.email === email)) {
+                showNotification("An account with this email already exists.");
+                return false;
+            }
+
+            users.push({ fullName, mobileNumber, email, password });
+            localStorage.setItem('users', JSON.stringify(users));
+
+            showNotification("Account created successfully! You can now log in.");
+            showLoginForm();
+
+            return false;
+        }
+    </script>
+</body>
+</html>
