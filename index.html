@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn From Jawad - Explore, Learn, Excel</title>
+    <style>
+        /* General Body Styling */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2E3A59;
+            color: white;
+            padding: 20px 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .logo-container h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav button {
+            background-color: #FF7F50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        nav button:hover {
+            background-color: #FF6347;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #FFB6C1, #B0E0E6);
+            color: #333;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2E3A59;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .hero button {
+            background-color: #FF7F50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .hero button:hover {
+            background-color: #FF6347;
+            transform: scale(1.05);
+        }
+
+        /* Courses Section */
+        .courses {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .courses h2 {
+            font-size: 2.5rem;
+            color: #2E3A59;
+            margin-bottom: 30px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .course-card .details {
+            padding: 20px;
+        }
+
+        .course-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .course-card p {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* Registration and Login Section */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .auth-modal input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .auth-modal button {
+            background-color: #2E3A59;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-modal button:hover {
+            background-color: #1e2a38;
+        }
+
+        /* Registration Section */
+        .register-section {
+            background-color: #fff8e1; /* Very light yellow */
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid #6b8e23; /* Olive Green */
+        }
+
+        .register-section h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1f3b4d; /* Dark Blue */
+        }
+
+        .register-section p {
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+
+        .register-section button {
+            background-color: #ffcc00; /* Golden Yellow */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-section button:hover {
+            background-color: #e6b800; /* Darker Yellow */
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #2E3A59;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #FFB6C1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <img src="nn.jpg" alt="Logo">
+            <h1>Learn From Jawad</h1>
+        </div>
+        <nav>
+            <button onclick="window.location.href='home.html'">Home</button>
+            <button onclick="window.location.href='contact.html'">Contact Us</button>
+            <button onclick="window.location.href='about.html'">About Me</button>
+            <button onclick=window.location.href="login.html">Login</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Learn From Jawad</h1>
+        <p>Your gateway to mastering new skills and excelling in your career!<br>
+            "Welcome to Learn From Jawad, your ultimate destination for unlocking your potential! Whether you're a complete beginner or a seasoned professional, our platform provides high-quality, hands-on courses tailored to help you grow. With cutting-edge technologies, industry insights, and practical projects, we ensure that your learning journey is not only enriching but also enjoyable. From mastering programming languages to excelling in creative fields like photography and graphic design, we offer something for everyone. Join thousands of learners who have transformed their skills and careers with us. Let's embark on this journey together—because at Learn From Jawad, your success is our mission!"</p>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses">
+        <h2>Our Courses</h2>
+        <div class="courses-grid">
+            <!-- Course Cards -->
+            <div class="course-card">
+                <img src="web deve.jpg" alt="Web Development">
+                <div class="details">
+                    <h3>Web Development</h3>
+                    <p>Learn HTML, CSS, JavaScript, and build amazing websites!</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="mobile .jpg" alt="Mobile App Development">
+                <div class="details">
+                    <h3>Mobile App Development</h3>
+                    <p>Develop Android and iOS apps using Kotlin and Swift.</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="Data science.jpg" alt="Data Science">
+                <div class="details">
+                    <h3>Data Science</h3>
+                    <p>Master Python, Machine Learning, and Big Data Analysis.</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="Graphic design.jpg" alt="Graphic Design">
+                <div class="details">
+                    <h3>Graphic Design</h3>
+                    <p>Learn Adobe Photoshop, Illustrator, and creative design.</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="PhotoGraphy.jpg" alt="Photography">
+                <div class="details">
+                    <h3>Photography</h3>
+                    <p>Master DSLR techniques and professional photography.</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="digital marketing.jpg" alt="Digital Marketing">
+                <div class="details">
+                    <h3>Digital Marketing</h3>
+                    <p>SEO, Social Media Marketing, and online branding skills.</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="cyber.jpg" alt="Cybersecurity">
+                <div class="details">
+                    <h3>Cybersecurity</h3>
+                    <p>Protect data and master ethical hacking techniques.</p>
+                </div>
+            </div>
+            <div class="course-card">
+                <img src="content .jpg" alt="Content Writing">
+                <div class="details">
+                    <h3>Content Writing</h3>
+                    <p>Write blogs, articles, and create engaging content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Registration Section -->
+    <section class="register-section">
+        <h3>Why Choose Us?</h3>
+        <p>We offer these courses for students who might not have access to traditional academies. Our mission is to make quality education available to everyone, no matter where they are.</p>
+        <button onclick="window.location.href='registration.html'">Register Now</button>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 Learn From Jawad. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <h3 id="auth-modal-title">Login</h3>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button id="auth-submit-btn" onclick="handleAuth()">Login</button>
+            <p id="auth-switch-text">Don't have an account? <span onclick="switchToRegister()">Create one</span></p>
+        </div>
+    </div>
+
+    <script>
+        function showAuthModal() {
+            const isLoggedIn = localStorage.getItem('loggedIn');
+            if (isLoggedIn) {
+                logout();
+            } else {
+                document.getElementById('auth-modal').style.display = 'flex';
+            }
+        }
+
+        function handleAuth() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Check if email and password are valid for demo purposes
+            if (email && password) {
+                localStorage.setItem('loggedIn', true);
+                document.getElementById('auth-btn').textContent = 'Logout';
+                document.getElementById('auth-modal').style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            document.getElementById('auth-btn').textContent = 'Login';
+        }
+
+        function switchToRegister() {
+            document.getElementById('auth-modal-title').textContent = 'Create an Account';
+            document.getElementById('auth-submit-btn').textContent = 'Create Account';
+            document.getElementById('auth-switch-text').innerHTML = 'Already have an account? <span onclick="switchToLogin()">Login</span>';
+        }
+
+        function switchToLogin() {
+            document.getElementById('auth-modal-title').textContent = 'Login';
+            document.getElementById('auth-submit-btn').textContent = 'Login';
+            document.getElementById('auth-switch-text').innerHTML = 'Don't have an account? <span onclick="switchToRegister()">Create one</span>';
+        }
+    </script>
+
+</body>
+</html>
